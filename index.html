@@ -1,9 +1,254 @@
-# data_stream.github.io
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research Results</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/apexcharts@3.28.0/dist/apexcharts.min.css">
+  <style>
+    /* Futuristic style */
+    :root {
+      --primary-color: #4CA1AF;
+      --secondary-color: #C4E0E5;
+      --font-color: #fff;
+      --background-color: #14161F;
+      --shadow-color: #000;
+      --border-color: #fff;
+    }
+    body {
+      background-color: var(--background-color);
+      color: var(--font-color);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    h1, h2, h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+    h1 {
+      font-size: 48px;
+      margin-bottom: 48px;
+    }
+    h2 {
+      font-size: 36px;
+      margin-bottom: 36px;
+    }
+    h3 {
+      font-size: 24px;
+      margin-bottom: 24px;
+    }
+    p {
+      font-size: 18px;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .chart {
+      height: 400px;
+      margin: 24px 0;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px var(--shadow-color);
+      background-color: var(--background-color);
+    }
+    .toggle {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+    .toggle label {
+      margin-right: 24px;
+      cursor: pointer;
+    }
+    .toggle input[type="radio"] {
+      display: none;
+    }
+    .toggle input[type="radio"] + span {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      margin-right: 8px;
+      border: 2px solid var(--border-color);
+      border-radius: 50%;
+      vertical-align: middle;
+      transition: border-color 0.2s ease-in-out;
+    }
+    .toggle input[type="radio"]:checked + span {
+      background-color: var(--secondary-color);
+      border-color: var(--secondary-color);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 48px;
+    }
+    th, td {
+      padding: 8px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+    }
+    th {
+      background-color: var(--primary-color);
+    }
+    /* File upload style */
+    .file-upload {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      border-radius: 
+      8px;
+box-shadow: 0 4px 8px var(--shadow-color);
+background-color: var(--background-color);
+margin: 24px 0;
+padding: 24px;
+}
+.file-upload label {
+display: block;
+margin-bottom: 12px;
+}
+.file-upload input[type="file"] {
+display: none;
+}
+.file-upload button {
+background-color: var(--primary-color);
+color: var(--font-color);
+padding: 8px 16px;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+transition: background-color 0.2s ease-in-out;
+}
+.file-upload button:hover {
+background-color: var(--secondary-color);
+}
+</style>
 
-<!DOCTYPE html> <html> <head>
-‹meta charset="utf-8"> <title>Project: Travel webpage</title>
-</head> <bodv>
-<h1>Travel to Costa Rica</h1>
-<p>...and you'll get to see these beauties!</p>
-<img src="https://www.kasandbox.org/programming-images/animals/crocodiles.png" alt="Scary crocodiles" width="200"/> </body>
+</head>
+<body>
+  <main>
+    <h1>Research Results</h1>
+    <p>Below are the results of our latest research project:</p>
+    <div class="chart" id="chart"></div>
+    <div class="toggle">
+      <label>
+        <input type="radio" name="chartType" value="line" checked>
+        <span></span>
+        Line
+      </label>
+      <label>
+        <input type="radio" name="chartType" value="bar">
+        <span></span>
+        Bar
+      </label>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Year</th>
+          <th>Revenue</th>
+          <th>Expenses</th>
+          <th>Profit</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2018</td>
+          <td>$500,000</td>
+          <td>$300,000</td>
+          <td>$200,000</td>
+        </tr>
+        <tr>
+          <td>2019</td>
+          <td>$600,000</td>
+          <td>$400,000</td>
+          <td>$200,000</td>
+        </tr>
+        <tr>
+          <td>2020</td>
+          <td>$700,000</td>
+          <td>$500,000</td>
+          <td>$200,000</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="file-upload">
+      <label for="csv">Upload CSV file:</label>
+      <input type="file" id="csv">
+      <button id="upload-btn">Upload</button>
+    </div>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.28.0/dist/apexcharts.min.js"></script>
+  <script>
+    // Chart options
+    const options = {
+      chart: {
+        type: 'line',
+        height: 400
+      },
+      series: [{
+        name: 'Revenue',
+        data: [500000, 600000, 700000]
+      }, {
+        name: 'Expenses',
+        data: [300000, 400000, 500000]
+      }, {
+        name: 'Profit',
+        data: [200000, 200000, 200000]
+      }],
+      xaxis: {
+        categories: [2018, 2019, 2020]
+      }
+    }
+    // Initialize chart
+const chart = new ApexCharts(document.querySelector("#chart"), options);
+chart.render();
+
+// Update chart type based on radio button selection
+const chartTypeRadios = document.querySelectorAll('[name="chartType"]');
+chartTypeRadios.forEach(radio => {
+radio.addEventListener('change', () => {
+chart.updateOptions({
+chart: {
+type: radio.value
+}
+});
+});
+});
+// Upload CSV file and render chart
+const uploadBtn = document.querySelector('#upload-btn');
+const csvInput = document.querySelector('#csv');
+uploadBtn.addEventListener('click', () => {
+  const file = csvInput.files[0];
+  const reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = () => {
+    const csv = reader.result;
+    const rows = csv.trim().split('\n').map(row => row.split(','));
+    const categories = rows[0].slice(1);
+    const series = rows.slice(1).map(row => {
+      const name = row[0];
+      const data = row.slice(1).map(parseFloat);
+      return { name, data };
+    });
+    chart.updateOptions({
+      xaxis: {
+        categories
+      },
+      series
+    });
+  };
+});
+</script>
+</body>
 </html>
